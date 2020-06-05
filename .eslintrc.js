@@ -11,10 +11,14 @@ module.exports = {
     'plugin:prettier/recommended',
   ],
   parserOptions: {
+    project: './tsconfig.json',
     ecmaFeatures: {
       jsx: true,
     },
     ecmaVersion: 2020,
     sourceType: 'module',
+  },
+  rules: {
+    '@typescript-eslint/camelcase': 'off',
   },
 };
