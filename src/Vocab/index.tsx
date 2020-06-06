@@ -1,41 +1,20 @@
 import React from 'react';
-import { Button, Container, Form, Grid, TextArea } from 'semantic-ui-react';
-import TranslateClient from '../Http/translate';
+import { Button, Form, Header } from 'semantic-ui-react';
+import TranslationRequest from './translationRequest';
 
 function Vocab() {
-  const [neededWords, setNeededWords] = React.useState('');
-  const [wordBank, setWordBank] = React.useState('');
-
-  // translates text -> target language
-  async function handleTranslate(translateText: string, target: string) {
-    const response = await TranslateClient.translate(translateText, target);
-    setWordBank(response);
-  }
-
   return (
     <>
-      <Grid>
-        <Grid.Row columns="equal">
-          <Grid.Column>
-            <Form>
-              <TextArea
-                placeholder="What words do you need?"
-                value={neededWords}
-                onChange={(e) =>
-                  setNeededWords((e.target as HTMLTextAreaElement).value)
-                }
-              />
-            </Form>
-          </Grid.Column>
-          <Grid.Column>
-            <Container>{wordBank}</Container>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+      <Header as="h3">What words do you need?</Header>
+      <Form>
+        <Form.Group widths="equal">
+          <TranslationRequest />
+        </Form.Group>
+      </Form>
       <Button
         attached="bottom"
-        content="Translate"
-        onClick={() => handleTranslate(neededWords, 'es')} // TODO: language picker
+        content="I need another"
+        onClick={() => console.log('add another')}
       />
     </>
   );
