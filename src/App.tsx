@@ -29,7 +29,7 @@ function App() {
           <Grid.Column>
             <Prompt />
           </Grid.Column>
-          <Grid.Column>
+          <Grid.Column verticalAlign="middle">
             <Vocab />
           </Grid.Column>
         </Grid.Row>

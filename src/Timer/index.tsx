@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Header, Grid, TextArea } from 'semantic-ui-react';
+import { Button, Header, Grid, Segment, TextArea } from 'semantic-ui-react';
 
 function Timer(props: any) {
   const { textInputRef, notifyFinished } = props;
@@ -35,7 +35,7 @@ function Timer(props: any) {
   }
 
   return (
-    <>
+    <Segment>
       <Header as="h1">
         {Math.floor(counter / 60)
           .toString()
@@ -51,7 +51,7 @@ function Timer(props: any) {
           onClick={stop}
         />
       </Grid.Row>
-    </>
+    </Segment>
   );
 }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form, Header } from 'semantic-ui-react';
+import { Button, Form, Segment, Header } from 'semantic-ui-react';
 import TranslationRequest from './translationRequest';
 
 function Vocab() {
@@ -20,7 +20,7 @@ function Vocab() {
   }
 
   return (
-    <>
+    <Segment>
       <Header as="h3">What words do you need?</Header>
       <Form widths="equal">
         {wordBank.map((word, idx) => (
@@ -36,7 +36,7 @@ function Vocab() {
         content="I need another"
         onClick={growWordBank}
       />
-    </>
+    </Segment>
   );
 }
 
