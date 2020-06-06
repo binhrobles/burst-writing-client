@@ -19,13 +19,19 @@ function Timer(props: any) {
       setCounting(false);
       notifyFinished(true);
     }
-  }, [counter, isCounting]);
+  }, [counter, isCounting, notifyFinished]);
 
   // auto-focus text area when starting timer
   function start() {
+    notifyFinished(false);
     setCounting(true);
     const node = textInputRef.current;
     if (node) node.focus();
+  }
+
+  function stop() {
+    setCounting(false);
+    notifyFinished(true);
   }
 
   return (
@@ -37,7 +43,13 @@ function Timer(props: any) {
         :{(counter % 60).toString().padStart(2, '0')}
       </Header>
       <Grid.Row>
-        <Button content="Start" primary onClick={start} />
+        <Button content="Start" primary disabled={isCounting} onClick={start} />
+        <Button
+          content="Stop"
+          secondary
+          disabled={!isCounting}
+          onClick={stop}
+        />
       </Grid.Row>
     </>
   );
