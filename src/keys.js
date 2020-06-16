@@ -1,5 +1,8 @@
 const keys = Object.freeze({
-  TRANSLATE_API_KEY: process.env.REACT_APP_TRANSLATE_API_KEY,
+  baseURL:
+    process.env.NODE_ENV === 'development'
+      ? 'http://localhost:4000/dev/'
+      : 'https://burstwriter.binhrobles.com/',
 });
 
 export default keys;

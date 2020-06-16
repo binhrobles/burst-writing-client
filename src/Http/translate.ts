@@ -1,10 +1,8 @@
 import axios from 'axios';
 import keys from '../keys';
 
-// TODO: migrate away from API Key usage to a proxying lambda
-
 const instance = axios.create({
-  baseURL: 'https://translation.googleapis.com/language/translate/v2',
+  baseURL: `${keys.baseURL}translate`,
 });
 
 function handleError(e: any) {
@@ -14,10 +12,8 @@ function handleError(e: any) {
 // text -> target language code
 async function translate(text: string, target: string) {
   try {
-    const response = await instance.get(
-      `?target=${target}&key=${keys.TRANSLATE_API_KEY}&q=${text}`,
-    );
-    return response.data.data.translations[0].translatedText;
+    const response = await instance.get(`?target=${target}&q=${text}`);
+    return response.data.translation;
   } catch (e) {
     handleError(e);
     return null;
