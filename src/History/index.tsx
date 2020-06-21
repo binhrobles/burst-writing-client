@@ -25,7 +25,7 @@ function History() {
         <List.Header as="a">Written 6/14 at 3:23pm</List.Header>
         <List.Description>
           Translations Needed:
-          {e.WordBank.join(', ')}
+          {e.WordBank}
         </List.Description>
       </List.Content>
     </List.Item>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Divider, Grid, Menu, Header } from 'semantic-ui-react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import History from './History/index';
+import Account from './Account/index';
 import Writer from './Writer/index';
 
 export default function App() {
@@ -15,6 +16,9 @@ export default function App() {
           <Grid.Column>
             <Menu secondary>
               <Menu.Item as={Link} to="/">
+                Account
+              </Menu.Item>
+              <Menu.Item as={Link} to="/history">
                 History
               </Menu.Item>
               <Menu.Item as={Link} to="/writer">
@@ -29,8 +33,11 @@ export default function App() {
           <Route path="/writer">
             <Writer />
           </Route>
-          <Route path="/">
+          <Route path="/history">
             <History />
+          </Route>
+          <Route path="/">
+            <Account />
           </Route>
         </Switch>
       </Router>
