@@ -10,13 +10,13 @@ function handleError(e: any) {
 }
 
 // text -> target language code
-async function translate(text: string, target: string) {
+async function translate(text: string, target: string): Promise<string> {
   try {
     const response = await instance.get(`?target=${target}&q=${text}`);
     return response.data.translation;
   } catch (e) {
     handleError(e);
-    return null;
+    return 'Error';
   }
 }
 

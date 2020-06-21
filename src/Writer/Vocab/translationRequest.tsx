@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'semantic-ui-react';
-import TranslateClient from '../Http/translate';
+import TranslateClient from '../../Http/translate';
 
 function TranslationRequest(props: any) {
   const { word, setWord } = props;
