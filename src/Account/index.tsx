@@ -27,7 +27,7 @@ export default function Account({ authClient }: AccountProps) {
 
       <Segment clearing>
         <Header as="h2">History</Header>
-        <History user={authClient.userDecodedToken.sub} />
+        <History authClient={authClient} />
       </Segment>
     </Container>
   );

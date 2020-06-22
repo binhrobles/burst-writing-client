@@ -1,20 +1,27 @@
 // functional component that smells like a GoogleAuth wrapper library
 import { useEffect, useState } from 'react';
 import jwt_decode from 'jwt-decode';
-import useJWTWithSessionStorage from './useJWTWithSessionStorage';
+import useTypeWithSessionStorage from './useTypeWithSessionStorage';
 import keys from '../keys';
 
 const useAuthClient = (): AuthClient => {
   const [authClient, setAuthClient] = useState<gapi.auth2.GoogleAuth | null>(
     null,
   );
-  const [userDecodedToken, updateUserToken] = useJWTWithSessionStorage();
+  const [userDecodedToken, updateUserToken] = useTypeWithSessionStorage<
+    JWTPayload
+  >('id_token');
+  const [userAuthToken, updateUserAuth] = useTypeWithSessionStorage<
+    gapi.auth2.AuthResponse
+  >('auth_token');
 
   const onLogin = (response: gapi.auth2.AuthResponse) => {
+    updateUserAuth(response);
     updateUserToken(jwt_decode(response.id_token));
   };
 
   const onLogout = () => {
+    updateUserAuth(null);
     updateUserToken(null);
   };
 
@@ -65,6 +72,7 @@ const useAuthClient = (): AuthClient => {
   return {
     login,
     logout,
+    userAuthToken,
     userDecodedToken,
   };
 };

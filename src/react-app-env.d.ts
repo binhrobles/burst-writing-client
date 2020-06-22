@@ -3,6 +3,7 @@
 interface AuthClient {
   login: Function;
   logout: Function;
+  userAuthToken: gapi.auth2.AuthResponse | null;
   userDecodedToken: JWTPayload | null;
 }
 

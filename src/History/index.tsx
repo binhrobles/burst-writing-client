@@ -3,21 +3,32 @@ import { Container, Image, List } from 'semantic-ui-react';
 import UserClient from '../Http/user';
 
 interface HistoryProps {
-  user: string;
+  authClient: AuthClient;
 }
 
-const History: FunctionComponent<HistoryProps> = ({ user }: HistoryProps) => {
+const History: FunctionComponent<HistoryProps> = ({
+  authClient,
+}: HistoryProps) => {
+  const { userDecodedToken, userAuthToken } = authClient;
   const [entries, updateEntries]: [
     Record<string, string | number>[],
     Function,
   ] = React.useState([]);
 
   React.useEffect(() => {
+    let isMounted = true;
     (async () => {
-      const e = await UserClient.getEntries(user);
-      updateEntries(e);
+      if (userDecodedToken && userAuthToken) {
+        const e = await UserClient(userAuthToken.id_token).getEntries(
+          userDecodedToken.sub,
+        );
+        if (isMounted) updateEntries(e);
+      }
     })();
-  }, [user]);
+    return () => {
+      isMounted = false;
+    };
+  }, [userDecodedToken, userAuthToken]);
 
   const renderEntries = entries.map((e) => (
     <List.Item key={e.CreateTime}>
