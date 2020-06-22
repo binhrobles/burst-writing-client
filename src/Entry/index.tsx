@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Segment, Message, Form, TextArea } from 'semantic-ui-react';
+import { Segment, Message, Form } from 'semantic-ui-react';
 
 declare global {
   interface Window {
@@ -8,8 +7,11 @@ declare global {
   }
 }
 
-function Entry(props: any) {
-  const { hasFinished, textInputRef } = props;
+interface EntryProps {
+  hasFinished: boolean;
+}
+
+const Entry = ({ hasFinished }: EntryProps) => {
   const [text, setText] = React.useState('');
 
   function checkText() {
@@ -31,7 +33,6 @@ function Entry(props: any) {
             id="checktext"
             name="text"
             placeholder="Set the timer, and start typing!"
-            ref={textInputRef}
             style={{ padding: 0 }}
             value={text}
             onChange={(e) => {
@@ -50,13 +51,8 @@ function Entry(props: any) {
       </Form>
     </>
   );
-}
-
-Entry.propTypes = {
-  textInputRef: PropTypes.shape({
-    current: PropTypes.instanceOf(TextArea),
-  }).isRequired,
-  hasFinished: PropTypes.bool.isRequired,
 };
+
+Entry.displayName = 'Entry';
 
 export default Entry;

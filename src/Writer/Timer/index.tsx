@@ -1,9 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Button, Header, Grid, Segment, TextArea } from 'semantic-ui-react';
+import { Button, Header, Grid, Segment } from 'semantic-ui-react';
 
-function Timer(props: any) {
-  const { textInputRef, notifyFinished } = props;
+interface TimerProps {
+  notifyFinished: Function;
+}
+
+function Timer({ notifyFinished }: TimerProps) {
   const [counter, setCounter] = React.useState(60);
   const [isCounting, setCounting] = React.useState(false);
 
@@ -25,8 +27,6 @@ function Timer(props: any) {
   function start() {
     notifyFinished(false);
     setCounting(true);
-    const node = textInputRef.current;
-    if (node) node.focus();
   }
 
   function stop() {
@@ -54,12 +54,5 @@ function Timer(props: any) {
     </Segment>
   );
 }
-
-Timer.propTypes = {
-  textInputRef: PropTypes.shape({
-    current: PropTypes.instanceOf(TextArea),
-  }).isRequired,
-  notifyFinished: PropTypes.func.isRequired,
-};
 
 export default Timer;

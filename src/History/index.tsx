@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Container, Image, List } from 'semantic-ui-react';
 import UserClient from '../Http/user';
 
-function History() {
+interface HistoryProps {
+  user: string;
+}
+
+const History: FunctionComponent<HistoryProps> = ({ user }: HistoryProps) => {
   const [entries, updateEntries]: [
     Record<string, string | number>[],
     Function,
@@ -10,10 +14,10 @@ function History() {
 
   React.useEffect(() => {
     (async () => {
-      const e = await UserClient.getEntries('binh');
+      const e = await UserClient.getEntries(user);
       updateEntries(e);
     })();
-  }, []);
+  }, [user]);
 
   const renderEntries = entries.map((e) => (
     <List.Item key={e.CreateTime}>
@@ -36,6 +40,6 @@ function History() {
       <List>{renderEntries}</List>
     </Container>
   );
-}
+};
 
 export default History;

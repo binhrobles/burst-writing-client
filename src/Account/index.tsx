@@ -1,10 +1,33 @@
 import React from 'react';
-import { Button, Icon } from 'semantic-ui-react';
-import keys from '../keys';
+import { Button, Header, Container, Image, Icon } from 'semantic-ui-react';
+import jwt_decode from 'jwt-decode';
+import History from '../History/index';
 import useStateWithSessionStorage from '../hooks/useStateWithSessionStorage';
+import keys from '../keys';
+
+interface JWTPayload {
+  iss: string;
+  azp: string;
+  aud: string;
+  sub: string;
+  email: string;
+  email_verified: boolean;
+  at_hash: string;
+  name: string;
+  picture: string;
+  given_name: string;
+  family_name: string;
+  locale: string;
+  iat: number;
+  exp: number;
+  jti: string;
+}
 
 export default function Account() {
   const [userAuth, updateUserAuth] = useStateWithSessionStorage('user_auth');
+  const [userDecodedToken, updateUserToken] = React.useState<JWTPayload | null>(
+    null,
+  );
   const [
     authClient,
     setAuthClient,
@@ -12,10 +35,12 @@ export default function Account() {
 
   const onLogin = (response: gapi.auth2.AuthResponse) => {
     updateUserAuth(JSON.stringify(response));
+    updateUserToken(jwt_decode(response.id_token));
   };
 
   const onLogout = () => {
     updateUserAuth('');
+    updateUserToken(null);
   };
 
   // loads Auth Client on page load
@@ -59,7 +84,7 @@ export default function Account() {
     }
   };
 
-  if (!userAuth) {
+  if (!userDecodedToken) {
     return (
       <Button icon color="google plus" labelPosition="left" onClick={login}>
         <Icon name="google" />
@@ -69,9 +94,18 @@ export default function Account() {
   }
 
   return (
-    <Button icon basic color="red" labelPosition="left" onClick={logout}>
-      <Icon name="google" />
-      Logout
-    </Button>
+    <Container>
+      <Header as="h2">
+        <Image circular src={userDecodedToken.picture} />
+        {userDecodedToken.given_name}
+      </Header>
+
+      <History user={userDecodedToken.sub} />
+
+      <Button icon basic color="red" labelPosition="left" onClick={logout}>
+        <Icon name="google" />
+        Logout
+      </Button>
+    </Container>
   );
 }

@@ -21,6 +21,8 @@ async function getEntries(
   }
 }
 
+// TODO: API to create user, update languages
+
 const UserClient = {
   getEntries,
 };

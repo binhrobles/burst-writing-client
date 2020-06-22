@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Container, Grid, TextArea } from 'semantic-ui-react';
+import { Button, Container, Grid } from 'semantic-ui-react';
 import Entry from '../Entry/index';
 import Prompt from '../Prompt/index';
 import Timer from './Timer/index';
@@ -8,9 +8,6 @@ import Vocab from './Vocab/index';
 function Writer() {
   const [hasFinished, notifyFinished] = React.useState(false);
 
-  // auto-focus text area when starting timer
-  const textInputRef = React.createRef<TextArea>();
-
   // TODO: save wordBank, text to server
 
   return (
@@ -18,10 +15,7 @@ function Writer() {
       <Grid>
         <Grid.Row columns="equal">
           <Grid.Column textAlign="center" verticalAlign="middle">
-            <Timer
-              textInputRef={textInputRef}
-              notifyFinished={notifyFinished}
-            />
+            <Timer notifyFinished={notifyFinished} />
           </Grid.Column>
           <Grid.Column>
             <Prompt />
@@ -33,7 +27,7 @@ function Writer() {
 
         <Grid.Row centered>
           <Grid.Column width={10}>
-            <Entry hasFinished={hasFinished} textInputRef={textInputRef} />
+            <Entry hasFinished={hasFinished} />
           </Grid.Column>
         </Grid.Row>
         <Grid.Row centered verticalAlign="bottom">
