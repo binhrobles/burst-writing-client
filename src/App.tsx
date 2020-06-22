@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Divider, Grid, Menu, Header } from 'semantic-ui-react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import Account from './Account/index';
 import Login from './Login/index';
 import Writer from './Writer/index';
 import useAuthClient from './hooks/useAuthClient';
@@ -26,6 +27,9 @@ export default function App() {
         <Divider />
 
         <Switch>
+          <Route path="/account">
+            <Account authClient={authClient} />
+          </Route>
           <Route path="/">
             <Writer />
           </Route>

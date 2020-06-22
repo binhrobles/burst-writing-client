@@ -23,7 +23,7 @@ export default function Login({ authClient }: LoginProps) {
 
   const trigger = (
     <Header as="h3" floated="right">
-      <Image circular tiny src={authClient.userDecodedToken.picture} />
+      <Image circular src={authClient.userDecodedToken.picture} />
     </Header>
   );
   const options = [
