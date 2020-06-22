@@ -2,32 +2,13 @@ import React from 'react';
 import { Button, Header, Container, Image, Icon } from 'semantic-ui-react';
 import jwt_decode from 'jwt-decode';
 import History from '../History/index';
-import useStateWithSessionStorage from '../hooks/useStateWithSessionStorage';
 import keys from '../keys';
-
-interface JWTPayload {
-  iss: string;
-  azp: string;
-  aud: string;
-  sub: string;
-  email: string;
-  email_verified: boolean;
-  at_hash: string;
-  name: string;
-  picture: string;
-  given_name: string;
-  family_name: string;
-  locale: string;
-  iat: number;
-  exp: number;
-  jti: string;
-}
+import useStateWithSessionStorage from '../hooks/useStateWithSessionStorage';
+import useJWTWithSessionStorage from '../hooks/useJWTWithSessionStorage';
 
 export default function Account() {
   const [userAuth, updateUserAuth] = useStateWithSessionStorage('user_auth');
-  const [userDecodedToken, updateUserToken] = React.useState<JWTPayload | null>(
-    null,
-  );
+  const [userDecodedToken, updateUserToken] = useJWTWithSessionStorage();
   const [
     authClient,
     setAuthClient,
