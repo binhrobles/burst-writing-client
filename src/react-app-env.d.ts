@@ -1,5 +1,11 @@
 /// <reference types="react-scripts" />
 
+interface AuthClient {
+  login: Function;
+  logout: Function;
+  userDecodedToken: JWTPayload | null;
+}
+
 interface JWTPayload {
   iss: string;
   azp: string;
