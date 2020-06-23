@@ -1,3 +1,13 @@
+# Burst Writer Client
+
+A language learning tool based on a game played with my Spanish teacher, Rocky, at PLQ. He would present me with a comic strip and ask me what words I needed to describe it. We'd create a Spanish word bank together, and then he'd start the timer, setting it somewhere between 1-2 minutes, just long enough to get some momentum, but never long enough to adequately describe the scene. I had to write as fast as possible, with the goal being half a page. This was intended to approximate my Spanish speaking level, in writing form, so we could review and correct my mistakes together. 
+
+This project strives to replicate that game, by first providing a comic prompt (pulled from somewhere) and an interactive word bank to your language of choice. Then, a timer is set and started and the user writes as fast as possible until it's out. A [Language Tool](https://languagetool.org/) integration performs a rough check of the grammar.
+
+Unfortunately, the LanguageTool tool doesn't seem to be made for this type of use case, really best suited for grammar checking for people already familiar with the language rather than correcting clumsy sentence construction. Human feedback seems to be king in this regard at the moment.
+
+# From create-react-app
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
